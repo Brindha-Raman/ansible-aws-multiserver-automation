@@ -349,7 +349,7 @@ ansible webservers -m ping
 ### Check hostnames across the fleet
 
 ```bash
-ansible webservers -m command -a "hostname"
+ansible webservers -m shell -a "hostname"
 ```
 
 ### Create the Webserver Role
