@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for roles/webserver
+web_package: nginx
+web_service: nginx
+web_root: /var/www/html
+nginx_config_path: /etc/nginx/sites-available/default

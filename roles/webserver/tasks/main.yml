@@ -1,0 +1,35 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Update apt package cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install Nginx
+  ansible.builtin.apt:
+    name: "{{ web_package }}"
+    state: present
+
+- name: Ensure Nginx is enabled and running
+  ansible.builtin.service:
+    name: "{{ web_service }}"
+    state: started
+    enabled: true
+
+- name: Deploy Nginx configuration
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: "{{ nginx_config_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify:
+    - Reload Nginx
+
+- name: Deploy web application
+  ansible.builtin.copy:
+    src: index.html
+    dest: "{{ web_root }}/index.html"
+    owner: root
+    group: root
+    mode: "0644"

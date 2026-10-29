@@ -1,0 +1,7 @@
+---
+- name: Configure AWS Multi-Server Web Fleet
+  hosts: webservers
+  become: true
+
+  roles:
+    - webserver
